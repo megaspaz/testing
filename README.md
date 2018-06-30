@@ -24,20 +24,25 @@
             rvm install ruby
             ```
 - #### Make a project directory and 'cd' to the new project directory
+    ```
+    mkdir testing
+
+    cd testing
+    ```
 
 - #### Install *bundler*
     ```
     gem install bundler
-    
+
     gem install rubygems-update
     ```
 
 - #### Create a file called *Gemfile* (Contents of file is below... Bear in mind, the versions may need changing!)
     ```
     source 'https://rubygems.org'
-    
+
     ruby '2.4.1'
-    
+
     gem 'cucumber', '3.1.1'
     gem 'rspec', '3.7.0'
     gem 'rspec-expectations', '3.7.0'
@@ -74,7 +79,7 @@
   https://chromedriver.storage.googleapis.com/index.html?path=2.40/
 
         - Uncompress ***chromedriver_linux64.zip*** or ***chromedriver_mac64.zip***
-        
+
         - Install
             ```
             sudo cp chromedriver /usr/bin/.
@@ -85,7 +90,7 @@
   for example, you might get the latest, which is ***version 2.36***.
 
         - Uncompress ***operadriver_linux64.zip*** or ***operadriver_mac64.zip***
-        
+
         - Install
             ```
             sudo cp operadriver /usr/bin/.
