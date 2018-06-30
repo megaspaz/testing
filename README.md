@@ -93,7 +93,7 @@
            ```
 
 - #### Write some cucumber! Enjoy!
-    In your top-level project directory, from the terminal, either:
+    Try the example in your top-level project directory, from the terminal, either:
     ```
     cucumber -p chrome
     ```
