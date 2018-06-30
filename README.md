@@ -50,7 +50,7 @@
     bundle install
     ```
 
-- #### Run initial cucummber
+- #### Run initial cucumber
     ```
     cucumber --init
     ```
