@@ -58,9 +58,9 @@
 - #### Get Selenium browser drivers *(Mac & Linux)*
     - ##### Firefox
         - Get ***geckodriver*** from https://github.com/mozilla/geckodriver/releases
-  for example, you might get ***geckodriver-v0.21.0-linux64.tar.gz***
+  for example, you might get ***geckodriver-v0.21.0-linux64.tar.gz*** or ***geckodriver-v0.21.0-macos.tar.gz***
 
-        - Uncompress ***geckodriver-v0.21.0-linux64.tar.gz***
+        - Uncompress ***geckodriver-v0.21.0-linux64.tar.gz***  or ***geckodriver-v0.21.0-macos.tar.gz***
         
         - Install
             ```
@@ -73,7 +73,7 @@
   for example, you might get the latest, which is now ***ChromeDriver 2.40***, at
   https://chromedriver.storage.googleapis.com/index.html?path=2.40/
 
-        - Uncompress ***chromedriver_linux64.zip***
+        - Uncompress ***chromedriver_linux64.zip*** or ***chromedriver_mac64.zip***
         
         - Install
             ```
@@ -84,7 +84,7 @@
         - Get ***operadriver*** from https://github.com/operasoftware/operachromiumdriver/releases
   for example, you might get the latest, which is ***version 2.36***.
 
-        - Uncompress ***operadriver_linux64.zip***
+        - Uncompress ***operadriver_linux64.zip*** or ***operadriver_mac64.zip***
         
         - Install
             ```
