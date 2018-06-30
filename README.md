@@ -81,10 +81,10 @@
             sudo chmod 755 /usr/bin/chromedriver
             ```
     - ##### Opera
-        - Get operadriver from https://github.com/operasoftware/operachromiumdriver/releases
-  for example, you might get the latest, which is version 2.36.
+        - Get ***operadriver*** from https://github.com/operasoftware/operachromiumdriver/releases
+  for example, you might get the latest, which is ***version 2.36***.
 
-        - Uncompress operadriver_linux64.zip
+        - Uncompress ***operadriver_linux64.zip***
         
         - Install
             ```
