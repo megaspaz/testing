@@ -1,0 +1,10 @@
+.gitconfig
+.gitignore
+results
+.idea
+foo*.feature
+.DS_Store
+*.yardoc
+doc
+*.jmx
+*.log
