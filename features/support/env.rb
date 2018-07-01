@@ -47,11 +47,9 @@ elsif ENV['SELENIUM_BROWSER'] == 'opera'
   end
   cap = Selenium::WebDriver::Remote::Capabilities.chrome('operaOptions' => {
     'binary' => opera_bin,
-    'args' => [
-        '--ignore-certificate-errors', '--disable-popup-blocking', '--disable-translate'
-    ]
+    'desiredCapabilities' => {"Geolocation" => {"Enable geolocation" => false}}
   })
-  $driver = Selenium::WebDriver.for(:remote, :url => @service.uri, :desired_capabilities => cap)
+  $driver = Selenium::WebDriver.for :chrome, desired_capabilities: cap, switches: %w[--incognito]
 else
   $driver = Selenium::WebDriver.for :firefox
 end
