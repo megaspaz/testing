@@ -44,6 +44,7 @@ GEM
     selenium-webdriver (3.13.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
+    syntax (1.2.2)
 
 PLATFORMS
   ruby
@@ -54,6 +55,7 @@ DEPENDENCIES
   rspec (= 3.7.0)
   rspec-expectations (= 3.7.0)
   selenium-webdriver
+  syntax
 
 RUBY VERSION
    ruby 2.4.1p111
