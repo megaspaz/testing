@@ -24,22 +24,23 @@ end
 ENV['OS'] = OsSniffer.get_local_os
 ENV['SELENIUM_BROWSER'] ||= 'firefox'
 
-if ENV['SELENIUM_BROWSER'] == 'chrome'
-  # Set options and driver to chrome.
+case ENV['SELENIUM_BROWSER']
+when 'chrome'
   options = Selenium::WebDriver::Chrome::Options.new
   options.add_argument('--ignore-certificate-errors')
   options.add_argument('--disable-popup-blocking')
   options.add_argument('--disable-translate')
   $driver = Selenium::WebDriver.for :chrome, options: options
-elsif ENV['SELENIUM_BROWSER'] == 'opera'
+when 'opera'
   @service = Selenium::WebDriver::Chrome::Service.new('/usr/bin/operadriver', 12345, {})
   @service.start
 
   # Get the binary depending on OS
   opera_bin =''
-  if ENV['OS'] == 'linux'
+  case ENV['OS']
+  when 'linux'
     opera_bin = '/usr/bin/opera'
-  elsif ENV['OS'] == 'mac'
+  when 'mac'
     opera_bin = '/Applications/Opera.app/Contents/MacOS/Opera'
   else
     STDERR.puts "OS/browser is not supported... Aborting..."
@@ -51,6 +52,7 @@ elsif ENV['SELENIUM_BROWSER'] == 'opera'
   })
   $driver = Selenium::WebDriver.for(:remote, :url => @service.uri, :desired_capabilities => cap)
 else
+  # Firefox default
   $driver = Selenium::WebDriver.for :firefox
 end
 
