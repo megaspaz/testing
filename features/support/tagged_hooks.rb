@@ -45,3 +45,9 @@ Before('@no_opera_on_linux') do
     pending 'Do not run for Opera on Linux'
   end
 end
+
+Before('@no_safari') do
+  if ENV['SELENIUM_BROWSER'] == 'safari'
+    pending 'Do not run for Safari'
+  end
+end
