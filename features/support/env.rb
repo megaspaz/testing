@@ -62,13 +62,25 @@ $driver.manage.window.size = Selenium::WebDriver::Dimension.new(1024, 985)
 # Take a screenshot on fail.
 After do |scenario|
   if scenario.failed?
+    time_now = Time.now.to_i
     begin
-      filename = "screenshot-#{Time.now.to_i}.png"
+      filename = "screenshot-#{time_now}.png"
       full_path = File.join(Dir.pwd, 'results', filename)
       $driver.save_screenshot(full_path)
       embed(filename, 'text/html', '<br />Screenshot<br /><br />')
     rescue Exception => e
       puts "Failed to capture screenshot.\nException:\n#{e}"
+    end
+
+    begin
+      filename = "html_dump-#{time_now}.txt"
+      full_path = File.join(Dir.pwd, 'results', filename)
+      File.open(full_path, 'w') { |file| file.write($driver.page_source) }
+      embed filename, "text/html", 'HTML Dump<br /><br />'
+    rescue Exception => e
+      $stdout.puts "Failed to embed HTML dump."
+      $stdout.puts e.message
+      e.backtrace.each { |l| $stdout.puts l }
     end
   end
 end
