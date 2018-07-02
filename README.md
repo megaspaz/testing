@@ -94,11 +94,12 @@
         - Install
             ```
             sudo cp operadriver /usr/bin/.
+
             sudo chmod 755 /usr/bin/operadriver
            ```
     - ##### Safari (Mac Only)
         - As of 2016, ***safaridriver*** is bundled automatically by Apple.
-        - Prior to running automation, open Safari and in the ***Developer*** menu item, select the ***Allow Remote Automation*** option.  
+        - Prior to running automation, open ***Safari*** and in the ***Developer*** menu item, select the ***Allow Remote Automation*** option.  
 
 - #### Write some cucumber! Enjoy!
     Try the example in your top-level project directory, from the terminal, either:
