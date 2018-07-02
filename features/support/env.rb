@@ -1,3 +1,4 @@
+require 'colored'
 require 'rbconfig'
 require 'selenium-webdriver'
 
@@ -43,7 +44,7 @@ when 'opera'
   when 'mac'
     opera_bin = '/Applications/Opera.app/Contents/MacOS/Opera'
   else
-    STDERR.puts "OS/browser is not supported... Aborting..."
+    puts Colored.colorize("OS/browser is not supported... Aborting...").bold.yellow
     exit 0
   end
   cap = Selenium::WebDriver::Remote::Capabilities.chrome('operaOptions' => {
@@ -51,6 +52,12 @@ when 'opera'
     'args' => %w('--ignore-certificate-errors' '--disable-popup-blocking' '--disable-translate')
   })
   $driver = Selenium::WebDriver.for(:remote, :url => @service.uri, :desired_capabilities => cap)
+when 'safari'
+  unless ENV['OS'] == 'mac'
+    puts Colored.colorize('Safari supported only on Mac OS. Aborting...').bold.yellow
+    exit 0
+  end
+  $driver = Selenium::WebDriver.for :safari
 else
   # Firefox default
   $driver = Selenium::WebDriver.for :firefox
@@ -87,5 +94,7 @@ end
 
 at_exit do
   $driver.quit
+  puts Colored.colorize(
+    'Safari requires manually quitting the browser...').bold.yellow if ENV['SELENIUM_BROWSER'] == 'safari'
   @service.stop if ENV['SELENIUM_BROWSER'] == 'opera'
 end
