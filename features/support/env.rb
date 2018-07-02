@@ -59,6 +59,20 @@ end
 # Unmaximize window (Firefox).
 $driver.manage.window.size = Selenium::WebDriver::Dimension.new(1024, 985)
 
+# Take a screenshot on fail.
+After do |scenario|
+  if scenario.failed?
+    begin
+      filename = "screenshot-#{Time.now.to_i}.png"
+      full_path = File.join(Dir.pwd, 'results', filename)
+      $driver.save_screenshot(full_path)
+      embed(filename, 'text/html', '<br />Screenshot<br /><br />')
+    rescue Exception => e
+      puts "Failed to capture screenshot.\nException:\n#{e}"
+    end
+  end
+end
+
 at_exit do
   $driver.quit
   @service.stop if ENV['SELENIUM_BROWSER'] == 'opera'
