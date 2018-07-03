@@ -14,4 +14,5 @@ Feature: Example test feature
 
     @no_firefox_on_mac
     Examples: : Searching for puppies
+      | search_for |
       | puppies    |
