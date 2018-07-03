@@ -9,7 +9,7 @@ module OsSniffer
 
     case RbConfig::CONFIG['host_os']
     when /mswin|windows/i
-      return "win"
+      return "windows"
     when /linux|arch/i
       return "linux"
     when /sunos|solaris/i
@@ -74,7 +74,8 @@ After do |scenario|
       filename = "screenshot-#{time_now}.png"
       full_path = File.join(Dir.pwd, 'results', filename)
       $driver.save_screenshot(full_path)
-      embed(filename, 'text/html', '<br />Screenshot<br /><br />')
+      browser_os = "#{ENV['SELENIUM_BROWSER'].capitalize}/#{ENV['OS'].capitalize} OS"
+      embed(filename, 'text/html', "<br />Screenshot (#{browser_os})<br /><br />")
     rescue Exception => e
       puts "Failed to capture screenshot.\nException:\n#{e}"
     end
