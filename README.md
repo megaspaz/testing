@@ -41,7 +41,7 @@
     ```
     source 'https://rubygems.org'
 
-    ruby '2.4.1'
+    ruby '2.5.1'
 
     gem 'cucumber', '3.1.1'
     gem 'rspec', '3.7.0'
