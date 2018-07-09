@@ -60,6 +60,7 @@ when 'safari'
   end
   $driver = Selenium::WebDriver.for :safari
 else
+  # Firefox default
   $driver = Selenium::WebDriver.for :firefox
 end
 
