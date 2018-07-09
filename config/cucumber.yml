@@ -1,6 +1,7 @@
 default: -c --expand --format pretty --format junit --out ./results/ --format html --out results/index.html --format rerun --out ./results/rerun.txt
 
 chrome: SELENIUM_BROWSER=chrome -p default
+headless-chrome: SELENIUM_BROWSER=headless-chrome -p default
 firefox: SELENIUM_BROWSER=firefox -p default
 opera: SELENIUM_BROWSER=opera -p default
 safari: SELENIUM_BROWSER=safari -p default
