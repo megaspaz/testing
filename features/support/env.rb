@@ -26,11 +26,12 @@ ENV['OS'] = OsSniffer.get_local_os
 ENV['SELENIUM_BROWSER'] ||= 'firefox'
 
 case ENV['SELENIUM_BROWSER']
-when 'chrome'
+when /chrome$/
   options = Selenium::WebDriver::Chrome::Options.new
   options.add_argument('--ignore-certificate-errors')
   options.add_argument('--disable-popup-blocking')
   options.add_argument('--disable-translate')
+  options.add_argument('--headless') if ENV['SELENIUM_BROWSER'].start_with?('headless')
   $driver = Selenium::WebDriver.for :chrome, options: options
 when 'opera'
   @service = Selenium::WebDriver::Chrome::Service.new('/usr/bin/operadriver', 12345, {})
