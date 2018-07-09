@@ -19,7 +19,7 @@ Then(/^I will see search results$/) do
     sleep 1
   end
   Selenium::WebDriver::Wait.new(:timeout => 5).until { @results_list = $driver.find_elements(:css, @result_locator) }
-  expect(@results_list.length > 0).to eq(true)
+  expect(@results_list.length).to be > 0
 end
 
 Given(/^I click on the first search result$/) do
