@@ -21,6 +21,7 @@
             \curl -sSL https://get.rvm.io | bash -s stable --ruby
             ```
 
+
 - #### Make a project directory and 'cd' to the new project directory
     ```
     mkdir testing
