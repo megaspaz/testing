@@ -1,5 +1,5 @@
 Given(/^I go to Google$/) do
-  $driver.navigate.to "https://www.google.com"
+  $driver.navigate.to("https://www.google.com")
 end
 
 When(/^I search for (kittens|puppies)$/) do |search_for|
