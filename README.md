@@ -11,7 +11,7 @@
             sudo apt-get update
             sudo apt-get install rvm
             ```
-            Reboot
+            Reboot<br />
             ```
             rvm install ruby
             ```
@@ -24,14 +24,12 @@
 - #### Make a project directory and 'cd' to the new project directory
     ```
     mkdir testing
-
     cd testing
     ```
 
 - #### Install *bundler*
     ```
     gem install bundler
-
     gem install rubygems-update
     ```
 
@@ -92,7 +90,6 @@
         - Install
             ```
             sudo cp operadriver /usr/bin/.
-
             sudo chmod 755 /usr/bin/operadriver
            ```
     - ##### Safari (Mac Only)
