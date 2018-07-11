@@ -24,5 +24,7 @@ end
 
 Given(/^I click on the first search result$/) do
   @results_list[0].click()
-  sleep 3
+  page_title = $driver.title
+  puts "PAGE TITLE; #{page_title}"
+  expect(page_title).to_not include 'Google Search' unless ENV['SELENIUM_BROWSER'] == 'opera'
 end
