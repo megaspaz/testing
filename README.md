@@ -11,7 +11,7 @@
             sudo apt-get update
             sudo apt-get install rvm
             ```
-            restart computer
+            Reboot
             ```
             rvm install ruby
             ```
