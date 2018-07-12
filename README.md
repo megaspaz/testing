@@ -104,6 +104,7 @@
     or
     ```
     cucumber -p firefox
+    cucumber -p firefox -p debug
      ```
     or
     ```
