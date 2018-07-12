@@ -105,7 +105,7 @@
     ```
     cucumber -p firefox
     cucumber -p firefox -p debug
-     ```
+    ```
     or
     ```
     cucumber -p opera
