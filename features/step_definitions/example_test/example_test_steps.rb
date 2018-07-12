@@ -24,7 +24,14 @@ end
 
 Given(/^I click on the first search result$/) do
   @results_list[0].click()
-  page_title = $driver.title
-  puts "PAGE TITLE; #{page_title}"
-  expect(page_title).to_not include 'Google Search' unless ENV['SELENIUM_BROWSER'] == 'opera'
+  google_title = 'Google Search'
+  if ENV['SELENIUM_BROWSER'] == 'safari'
+    # Safari doesn't block on page loading after clicking link. Would fail right away with title having Google Search.
+    # The wait acts the same as an assertion if it fails...
+    Selenium::WebDriver::Wait.new(:timeout => 2).until { $driver.title.include?(google_title) }
+  else
+    page_title = $driver.title
+    puts "PAGE TITLE; #{page_title}"
+    expect(page_title).to_not include  unless ENV['SELENIUM_BROWSER'] == 'opera'
+  end
 end
