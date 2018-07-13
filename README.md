@@ -51,10 +51,16 @@
     bundle install
     ```
 
-- #### Run initial cucumber
-    ```
-    cucumber --init
-    ```
+- #### Create the directory structure
+        . testing                            # top level directory created earlier
+        ├── config                           # cucumber configuration
+        ├── coderdojo
+        |   ├── features                     # feature and scenario definitions (test cases)
+        |   ├── pages                        # page object classes
+        |   └── step_definitions             # step implementations
+        |   └── helpers                      # testing application helper objects  
+        ├── sample_files                     # files for uploading from tests
+        └── support                          # "framework" hooks for setup/teardown/etc
 
 - #### Get Selenium browser drivers *(Mac & Linux)*
     - ##### Firefox
@@ -99,18 +105,19 @@
 - #### Write some cucumber! Enjoy!
     Try the example in your top-level project directory, from the terminal, either:
     ```
-    cucumber -p chrome
+    cucumber coderdojo/features -p chrome
+    cucumber coderdojo/features -p headless-chrome
     ```
     or
     ```
-    cucumber -p firefox
-    cucumber -p firefox -p debug
+    cucumber coderdojo/features -p firefox
+    cucumber coderdojo/features -p firefox -p debug
     ```
     or
     ```
-    cucumber -p opera
+    cucumber coderdojo/features -p opera
     ```
     or
     ```
-    cucumber -p safari
+    cucumber coderdojo/features-p safari
     ```

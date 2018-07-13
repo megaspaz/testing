@@ -1,0 +1,2 @@
+class GoogleSearchPage
+end
