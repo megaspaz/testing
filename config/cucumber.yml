@@ -1,4 +1,4 @@
-default: -c --expand --format pretty --format junit --out ./results/ --format html --out results/index.html --format rerun --out ./results/rerun.txt
+default: -c -r ./support -r ./coderdojo --expand --format pretty --format junit --out ./results/ --format html --out results/index.html --format rerun --out ./results/rerun.txt
 
 debug: DEBUG_MODE=true -p default
 
