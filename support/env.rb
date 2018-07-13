@@ -2,52 +2,13 @@ require 'colored'
 require 'rbconfig'
 require 'selenium-webdriver'
 require_relative './os_sniffer'
+require_relative './selenium_driver'
 
 ENV['OS'] = OsSniffer.get_local_os
 ENV['SELENIUM_BROWSER'] ||= 'firefox'
 ENV['DEBUG_MODE'] ||= 'false'
 
-case ENV['SELENIUM_BROWSER']
-when /chrome$/
-  options = Selenium::WebDriver::Chrome::Options.new
-  options.add_argument('--ignore-certificate-errors')
-  options.add_argument('--disable-popup-blocking')
-  options.add_argument('--disable-translate')
-  options.add_argument('--headless') if ENV['SELENIUM_BROWSER'].start_with?('headless')
-  $driver = Selenium::WebDriver.for :chrome, options: options
-when 'opera'
-  @service = Selenium::WebDriver::Chrome::Service.new('/usr/bin/operadriver', 12345, {})
-  @service.start
-
-  # Get the binary depending on OS
-  opera_bin =''
-  case ENV['OS']
-  when 'linux'
-    opera_bin = '/usr/bin/opera'
-  when 'mac'
-    opera_bin = '/Applications/Opera.app/Contents/MacOS/Opera'
-  else
-    puts Colored.colorize("OS/browser is not supported... Aborting...").bold.yellow
-    exit 0
-  end
-  cap = Selenium::WebDriver::Remote::Capabilities.chrome('operaOptions' => {
-    'binary' => opera_bin,
-    'args' => %w('--ignore-certificate-errors' '--disable-popup-blocking' '--disable-translate')
-  })
-  $driver = Selenium::WebDriver.for(:remote, :url => @service.uri, :desired_capabilities => cap)
-when 'safari'
-  unless ENV['OS'] == 'mac'
-    puts Colored.colorize('Safari supported only on Mac OS. Aborting...').bold.yellow
-    exit 0
-  end
-  $driver = Selenium::WebDriver.for :safari
-else
-  # Firefox default
-  $driver = Selenium::WebDriver.for :firefox
-end
-
-# Unmaximize window (Firefox).
-$driver.manage.window.size = Selenium::WebDriver::Dimension.new(1024, 985)
+$driver, @service = SeleniumDriver.new(ENV['SELENIUM_BROWSER'], ENV['OS']).get_driver() if $driver.nil?
 
 # Take a screenshot on fail.
 After do |scenario|
