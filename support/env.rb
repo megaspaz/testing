@@ -1,26 +1,7 @@
 require 'colored'
 require 'rbconfig'
 require 'selenium-webdriver'
-
-module OsSniffer
-  include RbConfig
-  def self.get_local_os
-    STDOUT.puts "Determining host operating system... #{RbConfig::CONFIG['host_os']}"
-
-    case RbConfig::CONFIG['host_os']
-    when /mswin|windows/i
-      return "windows"
-    when /linux|arch/i
-      return "linux"
-    when /sunos|solaris/i
-      return "sun"
-    when /darwin/i
-      return "mac"
-    else
-      return nil
-    end
-  end
-end
+require_relative './os_sniffer'
 
 ENV['OS'] = OsSniffer.get_local_os
 ENV['SELENIUM_BROWSER'] ||= 'firefox'
@@ -67,7 +48,6 @@ end
 
 # Unmaximize window (Firefox).
 $driver.manage.window.size = Selenium::WebDriver::Dimension.new(1024, 985)
-$browser = $driver.browser
 
 # Take a screenshot on fail.
 After do |scenario|
@@ -79,9 +59,9 @@ After do |scenario|
       File.open(full_path, 'w') { |file| file.write($driver.page_source) }
       embed(filename, "text/html", '<br />HTML Dump<br />')
     rescue Exception => e
-      $stdout.puts "Failed to embed HTML dump."
-      $stdout.puts e.message
-      e.backtrace.each { |l| $stdout.puts l }
+      puts "Failed to embed HTML dump."
+      puts e.message
+      e.backtrace.each { |l| puts l }
     end
 
     begin
