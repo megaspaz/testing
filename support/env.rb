@@ -1,12 +1,17 @@
+require 'active_support/core_ext/string/inflections'
+require 'rspec/matchers'
 require 'colored'
 require 'rbconfig'
 require 'selenium-webdriver'
+require 'yaml'
 require_relative './os_sniffer'
 require_relative './selenium_driver'
+require_relative './to_bool'
 
 ENV['OS'] = OsSniffer.get_local_os
 ENV['SELENIUM_BROWSER'] ||= 'firefox'
 ENV['DEBUG_MODE'] ||= 'false'
+ENV['VIEW_IMPL'] ||= 'desktop_web'
 
 $driver, @service = SeleniumDriver.new(ENV['SELENIUM_BROWSER'], ENV['OS']).get_driver() if $driver.nil?
 
