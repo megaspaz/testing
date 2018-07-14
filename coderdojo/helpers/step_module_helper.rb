@@ -1,0 +1,74 @@
+module StepModuleHelper
+
+  def self.create_helper_module(module_helper_name)
+    return ModuleHelperCreator.new(module_helper_name).create_helper_module
+  end
+
+  class ModuleHelperCreator
+
+    def initialize(module_helper_name)
+      @module_helper_name = module_helper_name
+      @helper_module_name = "#{@module_helper_name}Helpers"
+      @template_error_msg = "#{@helper_module_name} Template file not found. Naughty naughty..."
+      @steps_dir = File.expand_path(File.dirname(__FILE__) + '/../step_definitions')
+      @view_impls = {}
+      YAML.load_file(File.expand_path(File.dirname(__FILE__) +
+                                        '/../../config/view_impls.yml'))['view_impl'].each do |k, v|
+        @view_impls[v] = nil if k.end_with?('web')
+      end
+    end
+
+    def self.message
+      return "If using this, any module being extended by the module this factory provides " +
+             "needs to have its methods be instance methods."
+    end
+
+    def create_helper_module
+      puts "Creating #{@helper_module_name} Class/Module\n#{self.class.message}" if ENV['DEBUG_MODE'].to_bool
+      set_module_impl_files
+      return create_module
+    end
+
+    private
+    def create_module
+      base = Module.new
+      full_module_name = "#{@helper_module_name}::#{@module_helper_name}"
+      base.extend ::RSpec::Matchers # Let RSpec expect() work in implementation files.
+      unless @view_impls['Template'].nil?
+        require_relative @view_impls['Template']
+        base.extend "#{full_module_name}Template".constantize
+      else
+        raise LoadError, @template_error_msg
+      end
+
+      @view_impls.keys.each do |key|
+        next if key == 'Template'
+        ENV['VIEW_IMPL'] == key.underscore && !@view_impls[key].nil? ?
+          (require_relative @view_impls[key];base.extend "#{full_module_name}#{key}".constantize) :
+          # Don't really need to do anything. Just print message and let fall through to template lookup.
+          puts("#{@module_helper_name}: No implementation for #{key.underscore}. " +
+                  "Perhaps you should implement steps for this site type.") if ENV['DEBUG_MODE'].to_bool
+      end
+      return base
+    end
+
+    private
+    def set_module_impl_files
+      # Get impl files.
+      @view_impls.keys.each do |impl_key|
+        Dir["#{@steps_dir}/**/*_#{impl_key.downcase}.rb"].each do |impl_file|
+          module_name = "#{@module_helper_name}#{impl_key}"
+          if File.foreach(impl_file).first(5).to_s.match(/module +#{module_name}/)
+            @view_impls[impl_key] = impl_file.to_s
+            impl = File.basename(impl_file).to_s
+            unless impl.to_s == "#{module_name.underscore}.rb"
+              raise "Source file #{impl} name does not adhere to class/module name: #{module_name} " +
+                      "=> #{module_name.underscore}.rb"
+            end
+          end
+        end
+      end
+    end
+  end
+  private_constant(:ModuleHelperCreator)
+end
