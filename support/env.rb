@@ -41,12 +41,12 @@ After do |scenario|
 end
 
 at_exit do
-  if ENV['DEBUG_MODE'] == 'false'
+  if !ENV['DEBUG_MODE'].to_bool
     puts Colored.colorize(
       'Safari requires manually quitting the browser...').bold.yellow if ENV['SELENIUM_BROWSER'] == 'safari'
     $driver.quit
     @service.stop if ENV['SELENIUM_BROWSER'] == 'opera'
-  elsif ENV['DEBUG_MODE'] == 'true' && ENV['SELENIUM_BROWSER'] =~ /(chrome|opera|safari)$/
+  elsif ENV['DEBUG_MODE'].to_bool && ENV['SELENIUM_BROWSER'] =~ /(chrome|opera|safari)$/
     puts Colored.colorize(
       "Chromium based drivers quit the browser before our at_exit call. Using `detach: true` also did not work.\n" +
         "Browser is always killed -> https://github.com/SeleniumHQ/selenium/issues/742\n" +

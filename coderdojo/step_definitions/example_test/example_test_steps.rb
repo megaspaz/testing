@@ -9,9 +9,9 @@ When(/^I search for (kittens|puppies)$/) do |search_for|
 end
 
 Then(/^I will see search results$/) do
-  @results_list = steps_helper.verify_search_results
+  steps_helper.verify_search_results
 end
 
 Given(/^I click on the first search result$/) do
-  steps_helper.click_first_result(@results_list)
+  steps_helper.click_first_result
 end
