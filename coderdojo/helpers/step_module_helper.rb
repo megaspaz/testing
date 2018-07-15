@@ -43,11 +43,14 @@ module StepModuleHelper
 
       @view_impls.keys.each do |key|
         next if key == 'Template'
-        ENV['VIEW_IMPL'] == key.underscore && !@view_impls[key].nil? ?
-          (require_relative @view_impls[key];base.extend "#{full_module_name}#{key}".constantize) :
+        if ENV['VIEW_IMPL'] == key.underscore && !@view_impls[key].nil?
+          require_relative @view_impls[key]
+          base.extend "#{full_module_name}#{key}".constantize
+        else
           # Don't really need to do anything. Just print message and let fall through to template lookup.
-          puts(Colored.colorize("#{@module_helper_name}: No implementation for #{key.underscore}. " +
-                  "Perhaps you should implement steps for this site type.").blue) if ENV['DEBUG_MODE'].to_bool
+          puts Colored.colorize("#{@module_helper_name}: No implementation for #{key.underscore}. " +
+                  "Perhaps you should implement steps for this site type.").blue if ENV['DEBUG_MODE'].to_bool
+        end
       end
       return base
     end
