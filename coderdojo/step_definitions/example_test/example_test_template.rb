@@ -2,42 +2,19 @@ module ExampleTestHelpers
   module ExampleTestTemplate
 
     def go_to_google
-      $driver.navigate.to("https://www.google.com")
+      GoogleSearchPage.visit(GoogleSearchPage.page_url, $driver)
     end
 
     def search(search_for)
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {
-        $driver.find_element(:css, 'div#sb_ifc0 div#gs_lc0 input#lst-ib')
-      }
-      $driver.find_element(:css, 'div#sb_ifc0 div#gs_lc0 input#lst-ib').send_keys(search_for)
-      $driver.action.send_keys(:escape).perform
-      $driver.find_element(:css, 'div.jsb input[value="Google Search"]').click()
+      raise Cucumber::Pending, 'Implement me!'
     end
 
     def verify_search_results
-      result_locator = 'div.bkWMgd div.srg div.g div.rc h3.r a'
-      if ENV['OS'] == 'mac'
-        $driver.action.move_to(
-          $driver.find_element(:css, result_locator)).perform unless ENV['SELENIUM_BROWSER'] == 'safari'
-        sleep 1
-      end
-      Selenium::WebDriver::Wait.new(:timeout => 5).until { @results_list = $driver.find_elements(:css, result_locator) }
-      expect(@results_list.length).to be > 0
-      return @results_list
+      raise Cucumber::Pending, 'Implement me!'
     end
 
-    def click_first_result(results_list)
-      results_list[0].click()
-      google_title = 'Google Search'
-      if ENV['SELENIUM_BROWSER'] == 'safari'
-        # Safari doesn't block on page loading after clicking link. Would fail right away with title having Google Search.
-        # The wait acts the same as an assertion if it fails...
-        Selenium::WebDriver::Wait.new(:timeout => 2).until { $driver.title.include?(google_title) }
-      else
-        page_title = $driver.title
-        puts "PAGE TITLE; #{page_title}"
-        expect(page_title).to_not include  unless ENV['SELENIUM_BROWSER'] == 'opera'
-      end
+    def click_first_result
+      raise Cucumber::Pending, 'Implement me!'
     end
   end
 end
