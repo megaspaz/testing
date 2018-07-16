@@ -1,3 +1,4 @@
+@desktop_web @mobile_web @tablet_web
 Feature: Example test feature
 
   Background:
