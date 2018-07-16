@@ -23,6 +23,8 @@ After('@desktop_web or @mobile_web or @tablet_web') do |scenario|
   if scenario.failed?
     embed_html
     embed_screenshot
+  else
+    embed_text
   end
 end
 
