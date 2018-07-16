@@ -18,7 +18,7 @@ module EmbedResources
   end
 
   def embed_browser_os
-    embed_text( "<br />#{browser_os}<br />")
+    embed_text("<br />#{browser_os}<br />")
   end
 
   def embed_text(text)
