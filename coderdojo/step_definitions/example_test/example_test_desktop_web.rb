@@ -12,7 +12,7 @@ module ExampleTestHelpers
         sleep 1
       end
       @results_list = results_page.search_results
-      expect(@results_list.length).to be < 0
+      expect(@results_list.length).to be > 0
     end
 
     def click_first_result
