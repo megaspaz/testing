@@ -17,8 +17,12 @@ module EmbedResources
     end
   end
 
-  def embed_text
-    embed('', '', "<br />#{browser_os}<br />")
+  def embed_browser_os
+    embed_text( "<br />#{browser_os}<br />")
+  end
+
+  def embed_text(text)
+    embed('', '', text)
   end
 
   def embed_screenshot

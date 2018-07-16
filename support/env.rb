@@ -24,7 +24,7 @@ After('@desktop_web or @mobile_web or @tablet_web') do |scenario|
     embed_html
     embed_screenshot
   else
-    embed_text
+    embed_browser_os
   end
 end
 
