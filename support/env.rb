@@ -2,11 +2,12 @@ require 'active_support/core_ext/string/inflections'
 require 'rspec/matchers'
 require 'colored'
 require 'rbconfig'
+require 'require_all'
 require 'selenium-webdriver'
 require 'yaml'
 require_relative './os_sniffer'
-require_relative './selenium_driver'
 require_relative './to_bool'
+require_rel '../lib/*.rb'
 
 ENV['OS'] = OsSniffer.get_local_os
 ENV['SELENIUM_BROWSER'] ||= 'firefox'
@@ -20,25 +21,8 @@ end
 # Take a screenshot on fail.
 After('@desktop_web or @mobile_web or @tablet_web') do |scenario|
   if scenario.failed?
-    time_now = Time.now.to_i
-    begin
-      filename = "html_dump-#{time_now}.txt"
-      full_path = File.join(Dir.pwd, 'results', filename)
-      File.open(full_path, 'w') { |file| file.write($driver.page_source) }
-      embed(filename, "text/html", '<br />HTML Dump<br />')
-    rescue Exception => e
-      puts "Failed to embed HTML dump."
-      puts e.message
-      e.backtrace.each { |l| puts l }
-    end
-
-    begin
-      browser_os = "#{ENV['SELENIUM_BROWSER'].capitalize}/#{ENV['OS'].capitalize} OS"
-      encoded_img = $driver.screenshot_as(:base64)
-      embed("data:image/png;base64,#{encoded_img}",'image/png', "<br />Screenshot (#{browser_os})<br />")
-    rescue Exception => e
-      puts "Failed to capture screenshot.\nException:\n#{e}"
-    end
+    embed_html
+    embed_screenshot
   end
 end
 
