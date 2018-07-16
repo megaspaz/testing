@@ -1,4 +1,8 @@
 module EmbedResources
+  def browser_os
+    return "#{ENV['SELENIUM_BROWSER'].capitalize}/#{ENV['OS'].capitalize} OS"
+  end
+
   def embed_html
     time_now = Time.now.to_i
     begin
@@ -13,9 +17,12 @@ module EmbedResources
     end
   end
 
+  def embed_text
+    embed('', '', "<br />#{browser_os}<br />")
+  end
+
   def embed_screenshot
     begin
-      browser_os = "#{ENV['SELENIUM_BROWSER'].capitalize}/#{ENV['OS'].capitalize} OS"
       encoded_img = $driver.screenshot_as(:base64)
       embed("data:image/png;base64,#{encoded_img}",'image/png', "<br />Screenshot (#{browser_os})<br />")
     rescue Exception => e
