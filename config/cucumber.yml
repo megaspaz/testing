@@ -4,8 +4,14 @@ default: |
 
 debug: DEBUG_MODE=true -p default
 
-chrome: SELENIUM_BROWSER=chrome VIEW_IMPL=desktop_web -p default
-headless-chrome: SELENIUM_BROWSER=headless-chrome VIEW_IMPL=desktop_web -p default
-firefox: SELENIUM_BROWSER=firefox VIEW_IMPL=desktop_web -p default
-opera: SELENIUM_BROWSER=opera VIEW_IMPL=desktop_web -p default
-safari: SELENIUM_BROWSER=safari VIEW_IMPL=desktop_web -p default
+# Default view impl.
+desktop_web: VIEW_IMPL=desktop_web -p default
+mobile_web: VIEW_IMPL=mobile_web -p default
+tablet_web: VIEW_IMPL=tablet_web -p default
+api: VIEW_IMPL=api -p default
+
+chrome: SELENIUM_BROWSER=chrome -p default
+headless-chrome: SELENIUM_BROWSER=headless-chrome -p default
+firefox: SELENIUM_BROWSER=firefox -p default
+opera: SELENIUM_BROWSER=opera -p default
+safari: SELENIUM_BROWSER=safari -p default
