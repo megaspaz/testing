@@ -1,9 +1,11 @@
 view_impl:
   desktop_web: 'DesktopWeb'
   mobile_web: 'MobileWeb'
+  tablet_web: 'TabletWeb'
   template_web: 'Template'
   mobile_app_android: 'MobileAppAndroid'
   mobile_app_ios: 'MobileAppIos'
   desktop_app_windows: 'DesktopAppWindows'
   desktop_app_mac: 'DesktopAppMac'
   desktop_app_linux: 'DesktopAppLinux'
+  api: 'Api'
