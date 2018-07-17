@@ -119,5 +119,9 @@
     ```
     or
     ```
-    cucumber coderdojo/features-p safari
+    cucumber coderdojo/features -p safari
+    ```
+    or
+    ```
+    cucumber coderdojo/features -p api -t @api
     ```
