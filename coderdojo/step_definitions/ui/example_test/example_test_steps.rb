@@ -1,4 +1,4 @@
-steps_helper = StepModuleHelper.create_helper_module("ExampleTest")
+steps_helper = WebStepModuleHelper.create_helper_module("ExampleTest")
 
 Given(/^I go to Google$/) do
   steps_helper.go_to_google

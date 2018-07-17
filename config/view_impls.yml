@@ -5,6 +5,8 @@ view_impl:
   template_web: 'Template'
   mobile_app_android: 'MobileAppAndroid'
   mobile_app_ios: 'MobileAppIos'
+  tablet_app_android: 'TabletAppAndroid'
+  tablet_app_ios: 'TabletAppIos'
   desktop_app_windows: 'DesktopAppWindows'
   desktop_app_mac: 'DesktopAppMac'
   desktop_app_linux: 'DesktopAppLinux'

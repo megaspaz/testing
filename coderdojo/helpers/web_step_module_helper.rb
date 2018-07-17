@@ -1,4 +1,4 @@
-module StepModuleHelper
+module WebStepModuleHelper
 
   def self.create_helper_module(module_helper_name)
     return ModuleHelperCreator.new(module_helper_name).create_helper_module
