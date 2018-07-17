@@ -5,8 +5,6 @@ require 'rbconfig'
 require 'require_all'
 require 'selenium-webdriver'
 require 'yaml'
-require_relative './os_sniffer'
-require_relative './to_bool'
 require_rel '../lib/*.rb'
 
 ENV['OS'] = OsSniffer.get_local_os
