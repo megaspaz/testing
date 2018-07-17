@@ -1,8 +1,12 @@
+require 'logger'
 
 class ApiClient
   include RestClient
 
-  def initialize
+  def initialize(logger=nil)
+    @logger = (logger || ::Logger.new('results/api_client.log'))
+    @logger.level = ::Logger::DEBUG
+    RestClient.log = @logger
   end
 
   def get(url, headers={})
