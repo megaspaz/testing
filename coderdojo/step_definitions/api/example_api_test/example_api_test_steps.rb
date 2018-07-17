@@ -3,5 +3,5 @@ Given(/^I send a GET request to Google$/) do
 end
 
 Then(/^the response status is going to be 200$/) do
-  expect(@response.code).to be 200
+  expect(@response.code).to eql 200
 end
