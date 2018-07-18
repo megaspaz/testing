@@ -2,7 +2,7 @@
 platformName = "ios"
 deviceName = "iPad Air"
 platformVersion = "10.2"
-app = ""
+browserName = "Safari"
 automationName = 'XCUITest'
 
 [appium_lib]
