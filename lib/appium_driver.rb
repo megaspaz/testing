@@ -6,7 +6,10 @@ module AppiumDriver
     os = OsSniffer.get_local_os
     case ENV['VIEW_IMPL']
     when /^(mobile|tablet)_app_ios$/
-      raise Cucumber::Pending, 'IOS requires Mac. Aborting...' unless os == 'mac'
+      unless os == 'mac'
+        puts Colored.colorize('IOS requires Mac. Aborting...').bold.yellow
+        exit 0
+      end
       if ENV['VIEW_IMPL'] =~ /^mobile/
         caps = Appium.load_appium_txt(
           file: File.expand_path("./../../config/appium/ios/iphone/appium.txt", __FILE__), verbose: true)
@@ -15,10 +18,12 @@ module AppiumDriver
           file: File.expand_path("./../../config/appium/ios/ipad/appium.txt", __FILE__), verbose: true)
       end
     when 'mobile_app_android'
-      raise Cucumber::Pending, 'Not implemented.'
+      puts Colored.colorize('Not implemented...').bold.yellow
+      exit 0
       caps = Appium.load_appium_txt file: File.expand_path('./', __FILE__), verbose: true
     else  # tablet_app_android
-      raise Cucumber::Pending, 'Not implemented.'
+      puts Colored.colorize('Not implemented...').bold.yellow
+      exit 0
       caps = Appium.load_appium_txt file: File.expand_path('./', __FILE__), verbose: true
     end
     $driver = Appium::Driver.new(caps, true)
