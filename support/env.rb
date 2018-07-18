@@ -45,7 +45,6 @@ at_exit do
   case ENV['VIEW_IMPL']
   when /^(desktop|mobile|tablet)_web$/
     if !ENV['DEBUG_MODE'].to_bool
-      $api_client = nil
       puts Colored.colorize(
         'Safari requires manually quitting the browser...').bold.yellow if ENV['SELENIUM_BROWSER'] == 'safari'
       $driver&.quit
@@ -56,10 +55,7 @@ at_exit do
           "Browser is always killed -> https://github.com/SeleniumHQ/selenium/issues/742\n" +
           "Safari does not work for some other reason...").bold.yellow
     end
-  when 'api'
-    $api_client = nil
   when /app_(android|ios)$/
-    $api_client = nil
     $driver&.quit_driver
   end
 end
