@@ -1,9 +1,14 @@
 require 'active_support/core_ext/string/inflections'
+require 'appium_lib'
+require 'cucumber'
+require 'rspec'
+require 'rspec/expectations'
 require 'rspec/matchers'
 require 'colored'
 require 'rbconfig'
 require 'require_all'
 require 'rest-client'
+require 'rubygems'
 require 'selenium-webdriver'
 require 'yaml'
 require_rel '../lib/*.rb'
@@ -14,11 +19,13 @@ ENV['DEBUG_MODE'] ||= 'false'
 ENV['VIEW_IMPL'] ||= 'desktop_web'
 
 puts Colored.colorize(
-  "OS: #{ENV['OS'].upcase}\nBROWSER: #{ENV['VIEW_IMPL'] == 'api' ? 'NIL' : ENV['SELENIUM_BROWSER'].upcase}\n" +
+  "OS: #{ENV['OS'].upcase}\n" +
+    "BROWSER: #{ENV['VIEW_IMPL'] =~ /^(api|.*_app_(ios|android))$/ ? 'NIL' : ENV['SELENIUM_BROWSER'].upcase}\n" +
     "VIEW: #{ENV['VIEW_IMPL'].upcase}\nDEBUG: #{ENV['DEBUG_MODE'].upcase}").bold.blue
 
 SeleniumDriver.get_driver if ENV['VIEW_IMPL'] =~ /^(desktop|mobile|tablet)_web$/
-$api_client ||= ApiClient.new if ENV['VIEW_IMPL'] =~ /^(desktop_web|mobile_web|tablet_web|api)$/
+AppiumDriver.get_driver if ENV['VIEW_IMPL'] =~ /^(mobile_app|tablet_app)_(android|ios)$/
+$api_client ||= ApiClient.new if ENV['VIEW_IMPL'] =~ /^((desktop|mobile|tablet)_web|api|(mobile_app|tablet_app)_(android|ios))$/
 
 # Take a screenshot on fail.
 After('@desktop_web or @mobile_web or @tablet_web') do |scenario|
@@ -47,5 +54,8 @@ at_exit do
     end
   when 'api'
     $api_client = nil
+  when /app_(android|ios)$/
+    $api_client = nil
+    $driver&.quit_driver
   end
 end
