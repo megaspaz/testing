@@ -12,19 +12,21 @@ module AppiumDriver
       end
       if ENV['VIEW_IMPL'] =~ /^mobile/
         caps = Appium.load_appium_txt(
-          file: File.expand_path("./../../config/appium/ios/iphone/appium.txt", __FILE__), verbose: true)
+          file: File.expand_path('./../../config/appium/ios/iphone/appium.txt', __FILE__), verbose: true)
       else
         caps = Appium.load_appium_txt(
-          file: File.expand_path("./../../config/appium/ios/ipad/appium.txt", __FILE__), verbose: true)
+          file: File.expand_path('./../../config/appium/ios/ipad/appium.txt', __FILE__), verbose: true)
       end
     when 'mobile_app_android'
       puts Colored.colorize('Not implemented...').bold.yellow
       exit 0
-      caps = Appium.load_appium_txt file: File.expand_path('./', __FILE__), verbose: true
+      caps = Appium.load_appium_txt(
+        file: File.expand_path('./../../config/appium/android/appium.txt', __FILE__), verbose: true)
     else  # tablet_app_android
       puts Colored.colorize('Not implemented...').bold.yellow
       exit 0
-      caps = Appium.load_appium_txt file: File.expand_path('./', __FILE__), verbose: true
+      caps = Appium.load_appium_txt(
+        file: File.expand_path('./../../config/appium/android/appium.txt', __FILE__), verbose: true)
     end
     $driver = Appium::Driver.new(caps, true)
   end
