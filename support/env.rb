@@ -27,6 +27,10 @@ SeleniumDriver.get_driver if ENV['VIEW_IMPL'] =~ /^(desktop|mobile|tablet)_web$/
 AppiumDriver.get_driver if ENV['VIEW_IMPL'] =~ /^(mobile_app|tablet_app)_(android|ios)$/
 $api_client ||= ApiClient.new if ENV['VIEW_IMPL'] =~ /^((desktop|mobile|tablet)_web|api|(mobile_app|tablet_app)_(android|ios))$/
 
+Before('@mobile_app_ios or @mobile_app_android or @tablet_app_ios or @tablet_app_android') do
+  $driver.start_driver
+end
+
 # Take a screenshot on fail.
 After('@desktop_web or @mobile_web or @tablet_web') do |scenario|
   if scenario.failed?

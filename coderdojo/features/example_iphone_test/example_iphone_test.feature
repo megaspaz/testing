@@ -1,4 +1,4 @@
-@mobile_app_ios
+@mobile_app_ios @tablet_app_ios
 Feature: Example iphone test
 
   Scenario: Example scenario
