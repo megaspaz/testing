@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-World(SeleniumDriver, EmbedResources)
+World(SeleniumDriver, AppiumDriver, EmbedResources)
