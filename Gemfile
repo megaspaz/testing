@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 ruby '2.5.1'
 
 gem 'activesupport'
+gem 'appium_lib'
 gem 'colored'
 gem 'cucumber', '3.1.1'
 gem 'rest-client', '2.0.2'
