@@ -1,7 +1,6 @@
 require 'active_support/core_ext/string/inflections'
 require 'appium_lib'
 require 'cucumber'
-#require 'cucumber/ast'
 require 'rspec'
 require 'rspec/expectations'
 require 'rspec/matchers'
