@@ -32,12 +32,14 @@ Before('@mobile_app_ios or @mobile_app_android or @tablet_app_ios or @tablet_app
 end
 
 # Take a screenshot on fail.
-After('@desktop_web or @mobile_web or @tablet_web') do |scenario|
+After('@desktop_web or @mobile_web or @tablet_web or @mobile_app_ios or @mobile_app_android or ' +
+        '@tablet_app_ios or @tablet_app_android') do |scenario|
   if scenario.failed?
-    embed_html
+    embed_html if ENV['VIEW_IMPL'] =~ /^(desktop|mobile|tablet)_web$/
     embed_screenshot
   else
-    embed_browser_os
+    embed_browser_os if ENV['VIEW_IMPL'] =~ /^(desktop|mobile|tablet)_web$/
+    embed_view_impl if ENV['VIEW_IMPL'] =~ /^(mobile_app|tablet_app)_(android|ios)$/
   end
 end
 
@@ -55,7 +57,7 @@ at_exit do
           "Browser is always killed -> https://github.com/SeleniumHQ/selenium/issues/742\n" +
           "Safari does not work for some other reason...").bold.yellow
     end
-  when /app_(android|ios)$/
+  when /^.*_app_(android|ios)$/
     $driver&.quit_driver
   end
 end
