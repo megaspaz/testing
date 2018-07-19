@@ -37,14 +37,15 @@ module EmbedResources
     begin
       case ENV['VIEW_IMPL']
       when /^(desktop|mobile|tablet)_web$/
-        encoded_img = $driver.screenshot_as(:base64)
+        driver = $driver
         link_text = "<br />Screenshot (#{browser_os})<br />"
       when /^(mobile|tablet)_app_(android|ios)$/
-        encoded_img = $driver.driver.screenshot_as(:base64)
+        driver = $driver.driver
         link_text = "<br />Screenshot (#{view_impl})<br />"
       else
         raise 'Unknown view implementation.'
       end
+      encoded_img = driver.screenshot_as(:base64)
       embed("data:image/png;base64,#{encoded_img}",'image/png', link_text)
     rescue Exception => e
       puts "Failed to capture screenshot.\nException:\n#{e}"
