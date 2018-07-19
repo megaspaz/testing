@@ -39,7 +39,7 @@ module EmbedResources
       when /^(desktop|mobile|tablet)_web$/
         encoded_img = $driver.screenshot_as(:base64)
         link_text = "<br />Screenshot (#{browser_os})<br />"
-      when /^.*_app_(android|ios)$/
+      when /^(mobile|tablet)_app_(android|ios)$/
         encoded_img = $driver.driver.screenshot_as(:base64)
         link_text = "<br />Screenshot (#{view_impl})<br />"
       else
