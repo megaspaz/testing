@@ -12,7 +12,7 @@ module EmbedResources
     begin
       filename = "html_dump-#{time_now}.txt"
       full_path = File.join(Dir.pwd, 'results', filename)
-      File.open(full_path, 'w') { |file| file.write($driver.driver.page_source) }
+      File.open(full_path, 'w') { |file| file.write($driver.page_source) }
       embed(filename, "text/html", '<br />HTML Dump<br />')
     rescue Exception => e
       puts "Failed to embed HTML dump."
