@@ -1,7 +1,7 @@
 [caps]
 platformName = "ios"
 deviceName = "iPhone 6"
-platformVersion = "10.2"
+platformVersion = "10.1"
 browserName = "Safari"
 automationName = 'XCUITest'
 
