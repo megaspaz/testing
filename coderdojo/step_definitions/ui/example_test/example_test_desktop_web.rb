@@ -21,13 +21,12 @@ module ExampleTestHelpers
       results_page.click_first_result
       if ENV['SELENIUM_BROWSER'] == 'safari'
         # Safari doesn't block on page loading after clicking link. Would fail right away with title having Google Search.
-        # The wait acts the same as an assertion if it fails...
+        # The wait acts the same as an assertion if it fails... call it again though...
         results_page.wait_for(2) { results_page.title.include?(google_title) == false }
-      else
-        page_title = results_page.title
-        puts Colored.colorize("PAGE TITLE: #{page_title}").bold.cyan
-        expect(page_title).to_not include google_title unless ENV['SELENIUM_BROWSER'] == 'opera'
       end
+      page_title = results_page.title
+      puts Colored.colorize("PAGE TITLE: #{page_title}").bold.cyan
+      expect(page_title).to_not include google_title unless ENV['SELENIUM_BROWSER'] == 'opera'
     end
   end
 end
