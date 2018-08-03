@@ -23,6 +23,9 @@ puts Colored.colorize(
     "BROWSER: #{ENV['VIEW_IMPL'] =~ /^(api|.*_app_(ios|android))$/ ? 'NIL' : ENV['SELENIUM_BROWSER'].upcase}\n" +
     "VIEW: #{ENV['VIEW_IMPL'].upcase}\nDEBUG: #{ENV['DEBUG_MODE'].upcase}").bold.blue
 
+# Create output dir if it doesn't exist.
+Dir.mkdir('results') unless Dir.exist?('results')
+
 SeleniumDriver.get_driver if ENV['VIEW_IMPL'] =~ /^(desktop|mobile|tablet)_web$/
 AppiumDriver.get_driver if ENV['VIEW_IMPL'] =~ /^(mobile|tablet)_app_(android|ios)$/
 $api_client ||= ApiClient.new if ENV['VIEW_IMPL'] =~ /^((desktop|mobile|tablet)_web|api|(mobile|tablet)_app_(android|ios))$/
