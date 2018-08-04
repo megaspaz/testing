@@ -24,7 +24,7 @@ puts Colored.colorize(
     "VIEW: #{ENV['VIEW_IMPL'].upcase}\nDEBUG: #{ENV['DEBUG_MODE'].upcase}").bold.blue
 
 # Create output dir if it doesn't exist.
-Dir.mkdir('results') unless Dir.exist?('results')
+Dir.mkdir(File.join(Dir.pwd, 'results')) unless Dir.exist?(File.join(Dir.pwd, 'results'))
 
 SeleniumDriver.get_driver if ENV['VIEW_IMPL'] =~ /^(desktop|mobile|tablet)_web$/
 AppiumDriver.get_driver if ENV['VIEW_IMPL'] =~ /^(mobile|tablet)_app_(android|ios)$/
