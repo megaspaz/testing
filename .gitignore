@@ -8,3 +8,4 @@ foo*.feature
 doc
 *.jmx
 *.log
+/RubyApplication
