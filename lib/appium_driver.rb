@@ -18,15 +18,11 @@ module AppiumDriver
           file: File.expand_path('./../../config/appium/ios/ipad/appium.txt', __FILE__), verbose: true)
       end
     when 'mobile_app_android'
-      puts Colored.colorize('Not implemented...').bold.yellow
-      exit 0
       caps = Appium.load_appium_txt(
-        file: File.expand_path('./../../config/appium/android/appium.txt', __FILE__), verbose: true)
+        file: File.expand_path('./../../config/appium/android/phone/appium.txt', __FILE__), verbose: true)
     else  # tablet_app_android
-      puts Colored.colorize('Not implemented...').bold.yellow
-      exit 0
       caps = Appium.load_appium_txt(
-        file: File.expand_path('./../../config/appium/android/appium.txt', __FILE__), verbose: true)
+        file: File.expand_path('./../../config/appium/android/tablet/appium.txt', __FILE__), verbose: true)
     end
     $driver = Appium::Driver.new(caps, true)
   end

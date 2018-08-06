@@ -1,0 +1,9 @@
+[caps]
+platformName = "Android"
+deviceName = "Nexus_5X_API_28"
+appActivity = "com.google.android.apps.chrome.Main"
+appPackage = "com.android.chrome"
+
+[appium_lib]
+sauce_username = false
+sauce_access_key = false
