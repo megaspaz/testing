@@ -3,6 +3,7 @@ platformName = "Android"
 deviceName = "Nexus_10_API_28"
 appActivity = "com.google.android.apps.chrome.Main"
 appPackage = "com.android.chrome"
+automationName = 'uiautomator2'
 
 [appium_lib]
 sauce_username = false
