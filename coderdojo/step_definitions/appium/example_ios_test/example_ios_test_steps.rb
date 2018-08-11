@@ -12,6 +12,6 @@ end
 
 Then(/^the automation name and device will match appium.txt$/) do
   expect(@automation_name.to_s).to eql 'XCUITest'.downcase
-  expect(@device_name.to_s).to eql 'iPhone 6'
+  expect(@device_name.to_s).to eql ENV['VIEW_IMPL'] == 'mobile_app_ios' ? 'iPhone 6' : 'iPad Air'
   expect(@device.to_s).to eql 'ios'
 end

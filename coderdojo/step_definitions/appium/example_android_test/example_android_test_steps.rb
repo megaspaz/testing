@@ -14,6 +14,6 @@ end
 Then(/^I get welcome to chrome$/) do
   $driver.get_source.should =~ /Welcome to Chrome/
   expect(@automation_name.to_s).to eql 'uiautomator2'
-  expect(@device_name.to_s).to eql 'Nexus_5X_API_28'
+  expect(@device_name.to_s).to eql ENV['VIEW_IMPL'] == 'mobile_app_android' ? 'Nexus_5X_API_28' : 'Nexus_10_API_28'
   expect(@device.to_s).to eql 'android'
 end
