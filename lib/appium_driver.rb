@@ -26,4 +26,19 @@ module AppiumDriver
     end
     $driver = Appium::Driver.new(caps, true)
   end
+
+  def self.init_info(driver=nil, print_outout=false)
+    appium_driver ||= driver
+    hash = {}
+    hash[:automation_name] = appium_driver.automation_name
+    hash[:version] = appium_driver.appium_client_version
+    hash[:device] = appium_driver.appium_device
+    hash[:server_version] = appium_driver.appium_server_version
+    hash[:status] = appium_driver.appium_server_status
+    hash[:device_name] = appium_driver.caps[:deviceName]
+    puts Colored.colorize("Automation Name: #{hash[:automation_name]}\nDevice Name: #{hash[:device_name]}\n" +
+           "Device: #{hash[:device]}\nAppium Version: #{hash[:version]}\n" +
+           "Server Version: #{hash[:server_version]}\nServer Status: #{hash[:status]}").bold.cyan if print_outout
+    return hash
+  end
 end
