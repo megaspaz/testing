@@ -4,6 +4,7 @@ module SeleniumDriver
     return $driver unless $driver.nil?
 
     os = OsSniffer.get_local_os
+    driver, service = nil, nil
     case ENV['SELENIUM_BROWSER']
     when /chrome$/
       options = Selenium::WebDriver::Chrome::Options.new
@@ -11,10 +12,10 @@ module SeleniumDriver
       options.add_argument('--disable-popup-blocking')
       options.add_argument('--disable-translate')
       options.add_argument('--headless') if ENV['SELENIUM_BROWSER'].start_with?('headless')
-      $driver = Selenium::WebDriver.for :chrome, options: options
+      driver = Selenium::WebDriver.for :chrome, options: options
     when 'opera'
-      $service = Selenium::WebDriver::Chrome::Service.new('/usr/bin/operadriver', 12345, {})
-      $service.start
+      service = Selenium::WebDriver::Chrome::Service.new('/usr/bin/operadriver', 12345, {})
+      service.start
 
       # Get the binary depending on OS
       opera_bin =''
@@ -31,16 +32,16 @@ module SeleniumDriver
         'binary' => opera_bin,
         'args' => %w('--ignore-certificate-errors' '--disable-popup-blocking' '--disable-translate')
       })
-      $driver = Selenium::WebDriver.for(:remote, :url => $service.uri, :desired_capabilities => cap)
+      driver = Selenium::WebDriver.for(:remote, :url => service.uri, :desired_capabilities => cap)
     when 'safari'
       unless os == 'mac'
         puts Colored.colorize('Safari supported only on Mac OS. Aborting...').bold.yellow
         exit 0
       end
-      $driver = Selenium::WebDriver.for :safari
+      driver = Selenium::WebDriver.for :safari
     else
       # Firefox default
-      $driver = Selenium::WebDriver.for :firefox
+      driver = Selenium::WebDriver.for :firefox
     end
 
     case ENV['VIEW_IMPL']
@@ -52,6 +53,7 @@ module SeleniumDriver
       # desktop by default
       resolution = [1024, 985]
     end
-    $driver.manage.window.size = Selenium::WebDriver::Dimension.new(*resolution)
+    driver.manage.window.size = Selenium::WebDriver::Dimension.new(*resolution)
+    return driver, service
   end
 end
