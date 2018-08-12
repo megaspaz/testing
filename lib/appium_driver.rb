@@ -24,7 +24,8 @@ module AppiumDriver
       caps = Appium.load_appium_txt(
         file: File.expand_path('./../../config/appium/android/tablet/appium.txt', __FILE__), verbose: true)
     end
-    $driver = Appium::Driver.new(caps, true)
+    driver = Appium::Driver.new(caps, true)
+    return driver
   end
 
   def self.init_info(driver=nil, print_outout=false)
