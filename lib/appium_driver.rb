@@ -17,12 +17,14 @@ module AppiumDriver
         caps = Appium.load_appium_txt(
           file: File.expand_path('./../../config/appium/ios/ipad/appium.txt', __FILE__), verbose: true)
       end
-    when 'mobile_app_android'
-      caps = Appium.load_appium_txt(
-        file: File.expand_path('./../../config/appium/android/phone/appium.txt', __FILE__), verbose: true)
-    else  # tablet_app_android
-      caps = Appium.load_appium_txt(
-        file: File.expand_path('./../../config/appium/android/tablet/appium.txt', __FILE__), verbose: true)
+    else # *_app_android choice
+      if ENV['VIEW_IMPL'] =~ /^mobile/
+        caps = Appium.load_appium_txt(
+          file: File.expand_path('./../../config/appium/android/phone/appium.txt', __FILE__), verbose: true)
+      else  # tablet_app_android
+        caps = Appium.load_appium_txt(
+          file: File.expand_path('./../../config/appium/android/tablet/appium.txt', __FILE__), verbose: true)
+      end
     end
     return Appium::Driver.new(caps, true)
   end
