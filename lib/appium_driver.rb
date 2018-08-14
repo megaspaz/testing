@@ -26,6 +26,7 @@ module AppiumDriver
           file: File.expand_path('./../../config/appium/android/tablet/appium.txt', __FILE__), verbose: true)
       end
     end
+
     return Appium::Driver.new(caps, true)
   end
 
