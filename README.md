@@ -105,23 +105,30 @@
 - #### Write some cucumber! Enjoy!
     Try the example in your top-level project directory, from the terminal, either:
     ```
-    cucumber coderdojo/features -p chrome
-    cucumber coderdojo/features -p headless-chrome
+    cucumber coderdojo/features -p desktop_web -t @desktop_web -p chrome
+    cucumber coderdojo/features -p mobile_web -t @mobile_web -p headless-chrome
     ```
     or
     ```
-    cucumber coderdojo/features -p firefox
-    cucumber coderdojo/features -p firefox -p debug
+    cucumber coderdojo/features -p tablet_web -t @tablet_web -p firefox
+    cucumber coderdojo/features -p desktop_web -t @desktop_web -p firefox -p debug
     ```
     or
     ```
-    cucumber coderdojo/features -p opera
+    cucumber coderdojo/features -p mobile_web -t @mobile_web -p opera
     ```
     or
     ```
-    cucumber coderdojo/features -p safari
+    cucumber coderdojo/features -p desktop_web -t @desktop_web -p safari
     ```
     or
     ```
     cucumber coderdojo/features -p api -t @api
+    ```
+    or
+    ```
+    cucumber coderdojo/features -p mobile_app_ios -t @mobile_app_ios
+    cucumber coderdojo/features -p tablet_app_ios -t @tablet_app_ios
+    cucumber coderdojo/features -p mobile_app_android -t @mobile_app_android
+    cucumber coderdojo/features -p tablet_app_android -t @tablet_app_android
     ```
