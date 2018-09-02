@@ -5,9 +5,9 @@ default: |
 debug: DEBUG_MODE=true -p default
 
 # Default view impl.
-desktop_web: VIEW_IMPL=desktop_web -p default
-mobile_web: VIEW_IMPL=mobile_web -p default
-tablet_web: VIEW_IMPL=tablet_web -p default
+desktop_web: VIEW_IMPL=desktop_web -t @desktop_web -p default
+mobile_web: VIEW_IMPL=mobile_web -t @mobile_web -p default
+tablet_web: VIEW_IMPL=tablet_web -t @tablet_web -p default
 api: VIEW_IMPL=api -p default
 
 chrome: SELENIUM_BROWSER=chrome -p default
@@ -16,7 +16,7 @@ firefox: SELENIUM_BROWSER=firefox -p default
 opera: SELENIUM_BROWSER=opera -p default
 safari: SELENIUM_BROWSER=safari -p default
 
-mobile_app_android: VIEW_IMPL=mobile_app_android -p default
-mobile_app_ios: VIEW_IMPL=mobile_app_ios -p default
-tablet_app_android: VIEW_IMPL=tablet_app_android -p default
-tablet_app_ios: VIEW_IMPL=tablet_app_ios -p default
+mobile_app_android: VIEW_IMPL=mobile_app_android -t @mobile_app_android -p default
+mobile_app_ios: VIEW_IMPL=mobile_app_ios -t @mobile_app_ios -p default
+tablet_app_android: VIEW_IMPL=tablet_app_android -t @tablet_app_android -p default
+tablet_app_ios: VIEW_IMPL=tablet_app_ios -t @tablet_app_ios -p default
