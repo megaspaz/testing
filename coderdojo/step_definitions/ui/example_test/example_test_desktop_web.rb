@@ -26,7 +26,7 @@ module ExampleTestHelpers
       end
       page_title = results_page.title
       puts Colored.colorize("PAGE TITLE: #{page_title}").bold.cyan
-      expect(page_title).to_not include google_title
+      expect(page_title).to_not include google_title unless ENV['SELENIUM_BROWSER'] == 'opera'
     end
   end
 end
