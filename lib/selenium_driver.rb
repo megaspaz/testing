@@ -3,7 +3,7 @@ module SeleniumDriver
   def self.get_driver
     return $driver unless $driver.nil?
 
-    os = OsSniffer.get_local_os
+    os = ENV['OS']
     driver, service = nil, nil
     case ENV['SELENIUM_BROWSER']
     when /chrome$/
