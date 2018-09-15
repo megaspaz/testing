@@ -19,8 +19,8 @@ module ExampleTestHelpers
       google_title = 'Google Search'
       results_page = GoogleSearchResultsPage.new($driver)
       results_page.click_first_result
-      if ENV['SELENIUM_BROWSER'] == 'safari'
-        # Safari doesn't block on page loading after clicking link. Would fail right away with title having Google Search.
+      if ENV['SELENIUM_BROWSER'] =~ /^(safari|edge)$/
+        # Safari/Edge doesn't block on page loading after clicking link. Would fail right away with title having Google Search.
         # The wait acts the same as an assertion if it fails... call it again though...
         results_page.wait_for(2) { results_page.title.include?(google_title) == false }
       end

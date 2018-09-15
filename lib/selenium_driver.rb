@@ -14,6 +14,10 @@ module SeleniumDriver
       options.add_argument('--headless') if ENV['SELENIUM_BROWSER'].start_with?('headless')
       driver = Selenium::WebDriver.for :chrome, options: options
     when 'opera'
+      if os == 'windows'
+        puts Colored.colorize('Opera not supported on Windows Linux Subsystem. Aborting...').bold.yellow
+        exit 0
+      end
       service = Selenium::WebDriver::Chrome::Service.new('/usr/bin/operadriver', 12345, {})
       service.start
 
@@ -39,7 +43,21 @@ module SeleniumDriver
         exit 0
       end
       driver = Selenium::WebDriver.for :safari
+    when 'edge'
+      unless os == 'windows'
+        puts Colored.colorize('Microsoft Edge supported only on Windows OS. Aborting...').bold.yellow
+        exit 0
+      end
+      service = Selenium::WebDriver::Edge::Service.new('/usr/bin/MicrosoftWebDriver', 12345,
+                                                       {:args => '--host=127.0.0.1'})
+      service.start
+      caps = Selenium::WebDriver::Remote::Capabilities.edge
+      driver = Selenium::WebDriver.for :remote, :url => service.uri, desired_capabilities: caps
     else
+      if os == 'windows'
+        puts Colored.colorize('Firefox not supported on Windows Linux Subsystem. Aborting...').bold.yellow
+        exit 0
+      end
       # Firefox default
       driver = Selenium::WebDriver.for :firefox
     end
