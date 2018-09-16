@@ -53,7 +53,7 @@ at_exit do
       puts Colored.colorize(
         'Safari requires manually quitting the browser...').bold.yellow if ENV['SELENIUM_BROWSER'] == 'safari'
       $driver&.quit
-      $service&.stop if ENV['SELENIUM_BROWSER'] =~ /^(opera|edge)$/
+      $service&.stop
     elsif ENV['DEBUG_MODE'].to_bool && ENV['SELENIUM_BROWSER'] =~ /(chrome|opera|safari)$/
       puts Colored.colorize(
         "Chromium based drivers quit the browser before our at_exit call. Using `detach: true` also did not work.\n" +
