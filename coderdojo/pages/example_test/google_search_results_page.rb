@@ -1,6 +1,6 @@
 class GoogleSearchResultsPage < BasePage
 
-  SEARCH_RESULT = { css: 'div.bkWMgd div.srg div.g div.rc h3.r a' }
+  SEARCH_RESULT = { css: 'div.bkWMgd div.srg div.g div.rc div.r a' }
 
   def initialize(driver)
     super(driver)
