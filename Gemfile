@@ -12,5 +12,6 @@ gem 'rspec', '3.7.0'
 gem 'rspec-expectations', '3.7.0'
 gem 'rake'
 gem 'require_all'
+gem "rubyzip", ">= 1.2.2"
 gem 'selenium-webdriver'
 gem 'syntax'
