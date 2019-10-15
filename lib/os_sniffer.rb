@@ -10,6 +10,8 @@ module OsSniffer
     when /linux|arch/i
       return "windows-wsl" if Dir.exist?("/mnt/c/Windows")
       return "linux"
+    when "cygwin"
+      return "cygwin"
     when /sunos|solaris/i
       return "sun"
     when /darwin/i
