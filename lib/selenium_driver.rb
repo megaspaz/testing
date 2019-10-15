@@ -53,6 +53,20 @@ module SeleniumDriver
       service.start
       caps = Selenium::WebDriver::Remote::Capabilities.edge
       driver = Selenium::WebDriver.for :remote, :url => service.uri, desired_capabilities: caps
+    when 'ie'
+      if os != 'cygwin'
+        puts Colored.colorize('IE supported only on Windows under Cygwin. Aborting...').bold.yellow
+        exit 0
+      end
+
+      caps = Selenium::WebDriver::Remote::Capabilities.new
+      caps['browser'] = 'IE'
+      caps['os'] = 'Windows'
+      caps['os_version'] = '10'
+
+      driver = Selenium::WebDriver.for(:remote,
+                                       :url => "http://localhost:5555",
+                                       :desired_capabilities => caps)
     else
       if os == 'windows-wsl'
         puts Colored.colorize('Firefox not supported on Windows Subsystem for Linux. Aborting...').bold.yellow
