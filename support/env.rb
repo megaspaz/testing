@@ -28,7 +28,7 @@ Dir.mkdir(File.join(Dir.pwd, 'results')) unless Dir.exist?(File.join(Dir.pwd, 'r
 
 $driver, $service = SeleniumDriver.get_driver if ENV['VIEW_IMPL'] =~ /^(desktop|mobile|tablet)_web$/
 $driver = AppiumDriver.get_driver if ENV['VIEW_IMPL'] =~ /^(mobile|tablet)_app_(android|ios)$/
-$api_client ||= ApiClient.new if ENV['VIEW_IMPL'] =~ /^((desktop|mobile|tablet)_web|api|(mobile|tablet)_app_(android|ios))$/
+$api_client ||= ApiClient.new
 
 Before('@mobile_app_ios or @mobile_app_android or @tablet_app_ios or @tablet_app_android') do
   $driver.start_driver

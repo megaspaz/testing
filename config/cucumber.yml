@@ -16,6 +16,7 @@ firefox: SELENIUM_BROWSER=firefox -p default
 opera: SELENIUM_BROWSER=opera -p default
 safari: SELENIUM_BROWSER=safari -p default
 edge: SELENIUM_BROWSER=edge -p default
+ie: SELENIUM_BROWSER=ie -p default
 
 mobile_app_android: VIEW_IMPL=mobile_app_android -t @mobile_app_android -p default
 mobile_app_ios: VIEW_IMPL=mobile_app_ios -t @mobile_app_ios -p default
