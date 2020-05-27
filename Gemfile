@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.5.1'
 
-gem 'activesupport'
+gem 'activesupport', ">= 5.2.4.3"
 gem 'appium_lib'
 gem 'colored'
 gem 'cucumber', '3.1.2'
