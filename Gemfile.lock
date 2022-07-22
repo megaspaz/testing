@@ -85,7 +85,7 @@ GEM
     syntax (1.2.2)
     thread_safe (0.3.6)
     tomlrb (1.2.7)
-    tzinfo (1.2.7)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     unf (0.1.4)
       unf_ext
